@@ -9,7 +9,7 @@ public:
             }
 
         }
-        if(j==s.size()){
+        if(c==s.size()){
             return true;
         }else{
             return false;
