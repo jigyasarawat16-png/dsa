@@ -1,31 +1,39 @@
 class Solution {
 public:
     int thirdMax(vector<int>& nums) {
-        long long first = LLONG_MIN;
-        long long second = LLONG_MIN;
-        long long third = LLONG_MIN;
+        long long m = LLONG_MIN;
 
+        // 1st maximum
         for (int x : nums) {
-            if (x == first || x == second || x == third)
-                continue;
+            m = max(m, (long long)x);
+        }
 
-            if (x > first) {
-                third = second;
-                second = first;
-                first = x;
-            }
-            else if (x > second) {
-                third = second;
-                second = x;
-            }
-            else if (x > third) {
-                third = x;
+        long long first = m;
+        m = LLONG_MIN;
+
+        // 2nd maximum
+        for (int x : nums) {
+            if (x < first) {
+                m = max(m, (long long)x);
             }
         }
 
-        if (third == LLONG_MIN)
+        if (m == LLONG_MIN)
             return first;
 
-        return third;
+        long long second = m;
+        m = LLONG_MIN;
+
+        // 3rd maximum
+        for (int x : nums) {
+            if (x < second) {
+                m = max(m, (long long)x);
+            }
+        }
+
+        if (m == LLONG_MIN)
+            return first;
+
+        return m;
     }
 };
